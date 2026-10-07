@@ -1,129 +1,80 @@
-import React, { useEffect, useState } from "react"
-import { useStaticQuery } from "gatsby"
-import { GatsbyImage } from "gatsby-plugin-image"
-import { Link } from "gatsby"
-import gsap, { Back } from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { graphql } from "gatsby"
-import Github from "../images/svg/github.svg"
-import "../styles/projects.scss"
+import { useMemo, useState } from 'react'
+import { projects, type ProjectType } from '../data/projects'
+import { useReveal } from '../utils/useReveal'
+import styles from './Projects.module.css'
 
-type TProjectType = "Website" | "Web App" | "Design"
+type Filter = 'all' | ProjectType
 
+const filters: { label: string; value: Filter }[] = [
+  { label: 'All', value: 'all' },
+  { label: 'Web Apps', value: 'Web App' },
+  { label: 'Websites', value: 'Website' },
+  { label: 'Design', value: 'Design' },
+]
 
-gsap.registerPlugin(ScrollTrigger)
+function Projects() {
+  const { ref, visible } = useReveal<HTMLElement>()
+  const [filter, setFilter] = useState<Filter>('all')
 
-const Projects = () => {
-  const [filteredProjectType, setFilteredProjectType] = useState("")
-
-  useEffect(() => {
-    gsap.to(".project", {
-      opacity: 1,
-      duration: 0.7,
-      scale: 1,
-      y: -100,
-      ease: Back.easeOut,
-      stagger: 0.2,
-      scrollTrigger: {
-        trigger: ".project",
-        end: "bottom 20%",
-        start: "top 80%",
-        toggleActions: "play play resume reverse",
-      },
-    })
-  }, [filteredProjectType])
-
-  const data = useStaticQuery(graphql`
-    query {
-      allMarkdownRemark(sort: {frontmatter: {date: ASC}}) {
-        edges {
-          node {
-            frontmatter {
-              path
-              title
-              type
-              website
-              date
-              code
-              featuredImage {
-                childImageSharp {
-                  gatsbyImageData(height: 600)
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  `)
-
-  const handleProjectTypeSelect = (skill: TProjectType | '') => {
-    setFilteredProjectType(skill)
-  }
+  const shown = useMemo(
+    () => projects.filter((p) => filter === 'all' || p.type === filter),
+    [filter]
+  )
 
   return (
-    <section id="projects" className="recent-work_section">
-      <h2>Projects</h2>
-      <p>See either the live project or code repository of some of my work.</p>
-      <div className="project-types">
-      <span onClick={() => handleProjectTypeSelect("")} className={`project-type ${[''].includes(filteredProjectType) ? 'selected' : ''}`}>All</span>
-        <span onClick={() => handleProjectTypeSelect("Web App")} className={`project-type ${['' || 'Web App'].includes(filteredProjectType) ? 'selected' : ''}`}>Web Apps</span>
-        <span onClick={() => handleProjectTypeSelect("Website")} className={`project-type ${['' || 'Website'].includes(filteredProjectType) ? 'selected' : ''}`}>Websites</span>
-        <span onClick={() => handleProjectTypeSelect("Design")} className={`project-type ${['' || 'Design'].includes(filteredProjectType) ? 'selected' : ''}`}>Designs</span>
-      </div>
-      <div className="projects container">
-        {data.allMarkdownRemark.edges.filter((edge: any) => filteredProjectType.includes(edge.node.frontmatter.type) || filteredProjectType === '').map((edge: any) => {
-          return (
-            <article
-              className="project"
-              key={edge.node.frontmatter.title}
+    <section id="projects" ref={ref} className={`${styles.projects} reveal ${visible ? 'in' : ''}`}>
+      <div className="wrap">
+        <div className={styles.head}>
+          <div>
+            <p className="eyebrow" style={{ color: 'var(--lilac)' }}>03 — Projects</p>
+            <h2 className={styles.heading}>Selected work</h2>
+          </div>
+          <p className={styles.count}>{shown.length} shown · 2020 – 2024</p>
+        </div>
+
+        <div className={styles.filters}>
+          {filters.map((f) => (
+            <button
+              key={f.value}
+              className={`${styles.filterBtn} ${filter === f.value ? styles.active : ''}`}
+              onClick={() => setFilter(f.value)}
             >
-              <div className="overlay">
-                {edge.node.frontmatter.website && (
-                  <a
-                    href={edge.node.frontmatter.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    View Site
-                  </a>
-                )}
-                <Link to={edge.node.frontmatter.path} state={{ modal: true }}>
-                  Overview
-                </Link>
+              {f.label}
+            </button>
+          ))}
+        </div>
+
+        <div className={styles.grid}>
+          {shown.map((project, i) => (
+            <article key={project.title} className={styles.card}>
+              <div className={styles.cardTop}>
+                <span className={styles.index}>{String(i + 1).padStart(2, '0')} / {project.year}</span>
+                <span className={styles.type}>{project.type}</span>
               </div>
-              <GatsbyImage
-                image={
-                  edge.node.frontmatter.featuredImage.childImageSharp.gatsbyImageData
-                }
-                objectFit="cover"
-                // style={{ position: "absolute" }}
-                alt={`${edge.node.frontmatter.title} featured image`}
-              />
-              <header className="project-header">
-                <h3 className="project-title">{edge.node.frontmatter.title}</h3>
-                <div className="project-types">
-                  <span className="project-type">{edge.node.frontmatter.type[0]}</span>
-                </div>
-                {edge.node.frontmatter.code !== "" ? (
-                  <ul className="project-links">
-                    <li className="project-link">
-                      <a
-                        href={edge.node.frontmatter.code}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <Github />
-                      </a>
-                    </li>
-                  </ul>
-                ) : (
-                  ""
+              <div className={styles.cover}>
+                <img src={project.image} alt={`${project.title} preview`} loading="lazy" />
+              </div>
+              <p className={styles.title}>{project.title}</p>
+              <div className={styles.tech}>
+                {project.tech.map((t) => (
+                  <span key={t} className={`chip ${styles.techChip}`}>{t}</span>
+                ))}
+              </div>
+              <div className={styles.links}>
+                {project.website && (
+                  <a href={project.website} target="_blank" rel="noopener noreferrer">Visit site ↗</a>
                 )}
-              </header>
+                {project.code && (
+                  <a href={project.code} target="_blank" rel="noopener noreferrer">Source ↗</a>
+                )}
+                {project.external && (
+                  <a href={project.external.href} target="_blank" rel="noopener noreferrer">{project.external.label} ↗</a>
+                )}
+                {project.note && <span className={styles.disabled}>{project.note}</span>}
+              </div>
             </article>
-          )
-        })}
+          ))}
+        </div>
       </div>
     </section>
   )

@@ -1,47 +1,31 @@
 {
-  "name": "personal-website-2",
-  "version": "1.0.0",
+  "name": "personal-website",
   "private": true,
-  "description": "personal-website-2",
-  "author": "jeremygervais",
-  "keywords": [
-    "gatsby"
-  ],
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "develop": "gatsby develop",
-    "start": "gatsby develop",
-    "build": "gatsby build",
-    "serve": "gatsby serve",
-    "clean": "gatsby clean",
-    "typecheck": "tsc --noEmit"
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
   },
   "dependencies": {
-    "@mdx-js/react": "^2.3.0",
-    "gatsby": "^5.7.0",
-    "gatsby-plugin-google-gtag": "^5.7.0",
-    "gatsby-plugin-image": "^3.7.0",
-    "gatsby-plugin-manifest": "^5.13.1",
-    "gatsby-plugin-mdx": "^5.7.0",
-    "gatsby-plugin-react-svg": "^3.3.0",
-    "gatsby-plugin-robots-txt": "^1.8.0",
-    "gatsby-plugin-sass": "^6.7.0",
-    "gatsby-plugin-sharp": "^5.8.1",
-    "gatsby-plugin-sitemap": "^6.13.1",
-    "gatsby-remark-images": "^7.8.0",
-    "gatsby-source-filesystem": "^5.7.0",
-    "gatsby-transformer-remark": "^6.8.0",
-    "gatsby-transformer-sharp": "^5.8.0",
-    "gsap": "^3.11.5",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "sass": "^1.59.2",
-    "three": "^0.167.0"
+    "@react-hook/mouse-position": "^4.1.3",
+    "framer-motion": "^11.2.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
-    "@types/node": "^20.14.12",
-    "@types/react": "^18.0.28",
-    "@types/react-dom": "^18.0.11",
-    "@types/three": "^0.167.0",
-    "typescript": "^5.5.4"
+    "@eslint/js": "^9.25.0",
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "@vitejs/plugin-react": "^4.4.1",
+    "eslint": "^9.25.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "globals": "^16.0.0",
+    "typescript": "~5.8.3",
+    "typescript-eslint": "^8.30.1",
+    "vite": "^6.3.5"
   }
 }

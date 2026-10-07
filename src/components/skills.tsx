@@ -1,169 +1,85 @@
-import React, { useRef, useEffect, MutableRefObject } from "react"
-import gsap, { Back } from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { useReveal } from '../utils/useReveal'
+import styles from './Skills.module.css'
 
-import Uiux from "../images/svg/uiux.svg"
-import WebDev from "../images/svg/webdev.svg"
-import Design from "../images/svg/design.svg"
-import "../styles/skills.scss"
+function Chips({ items }: { items: string[] }) {
+  return (
+    <div className={styles.chips}>
+      {items.map((item) => (
+        <span key={item} className="chip">{item}</span>
+      ))}
+    </div>
+  )
+}
 
-gsap.registerPlugin(ScrollTrigger)
-
-const Skills: React.FC = () => {
-  let skillsSectionRef: MutableRefObject<HTMLDivElement | null> = useRef(null);
-
-  useEffect(() => {
-    gsap.to(skillsSectionRef, {
-      opacity: 1,
-      duration: 0.7,
-      scale: 1,
-      y: -100,
-      ease: Back.easeOut,
-      scrollTrigger: {
-        // @ts-ignore
-        trigger: skillsSectionRef,
-        end: "bottom 20%",
-        start: "top 80%",
-        toggleActions: "play play resume reverse",
-      },
-    })
-  }, [])
+function Skills() {
+  const { ref, visible } = useReveal<HTMLElement>()
 
   return (
-    <div>
-      <section id="skills" className="skills-section">
-        <div
-          className="skills-container container mx-auto"
-          ref={el => {
-            // @ts-ignore
-            skillsSectionRef = el
-          }}
-        >
-          <article className="uiux_skills skill-wrapper">
-            <header>
-              <Uiux />
-              <h2 className="skill-title">Front-End Development</h2>
-            </header>
-            <div className="skill-body">
-              <p className="skill-overview">
-                Modern, eye-catching, and
-                easy-to-use.
-              </p>
-              <hr className="skill-hr" />
-              <div className="skill-subsection">
-                <p className="skill-subsection_title">Frameworks / Libraries</p>
-                <div className="skill-subsection_items">
-                  <p>
-                    React | Vue | Gatsby | Nuxt | Lit Element | Redux | Vuex | ThreeJS | GSAP | jQuery
-                  </p>
-                </div>
-              </div>
-              <div className="skill-subsection">
-                <p className="skill-subsection_title">
-                  CSS Framework & Technologies
-                </p>
-                <div className="skill-subsection_items">
-                  <p>
-                    Bootstrap | Tailwind | Material UI | Font Awesome
-                  </p>
-                </div>
-              </div>
-              <div className="skill-subsection">
-                <p className="skill-subsection_title">UI / UX Tools</p>
-                <ul className="skill-subsection_items">
-                  <li>Figma</li>
-                  <li>Adobe Creative Suite ( PS | AI | XD )</li>
-                  <li>Pen & Paper</li>
-                </ul>
-              </div>
-            </div>
-          </article>
-          <article className="web-dev_skills skill-wrapper">
-            <header>
-              <WebDev />
-              <h2 className="skill-title">Website Development</h2>
-            </header>
-            <div className="skill-body">
-              <p className="skill-overview">
-                From client-friendly WYSIWYG to fully custom software.
-              </p>
-              <hr className="skill-hr" />
-              <div className="skill-subsection">
-                <p className="skill-subsection_title">Languages</p>
-                <div className="skill-subsection_items">
-                  <p>HTML | CSS | SASS | JavaScript | Typescript | Golang | C# | JSON | XML | Markdown</p>
-                </div>
-              </div>
-              <div className="skill-subsection">
-                <p className="skill-subsection_title">Development Tools</p>
-                <div className="skill-subsection_items">
-                  <p>Git | Github | Gitlab | Docker | WSL | Asana | Jira | Confluence | Trello</p>
-                </div>
-              </div>
-              <div className="skill-subsection">
-                <p className="skill-subsection_title">Testing/QA</p>
-                <div className="skill-subsection_items">
-                  <p>Jest | Mocha | Chai | Sinon | Playwright | Selenium</p>
-                </div>
-              </div>
-              <div className="skill-subsection">
-                <p className="skill-subsection_title">Integrations</p>
-                <div className="skill-subsection_items">
-                  <p>Hubspot | Google Analytics</p>
-                </div>
-              </div>
-              <div className="skill-subsection">
-                <p className="skill-subsection_title">CMS</p>
-                <div className="skill-subsection_items">
-                  <p>Wordpress | Contentful | Strapi</p>
-                </div>
-              </div>
-            </div>
-          </article>
-          <article className="collateral-skills skill-wrapper">
-            <header>
-              <Design />
-              <h2 className="skill-title">Back-End Development</h2>
-            </header>
-            <div className="skill-body">
-              <p className="skill-overview">
-                Developing/integrating API's, configuring databases, deployment and
-                all that jazz.
-              </p>
-              <hr className="skill-hr" />
-              <div className="skill-subsection">
-                <p className="skill-subsection_title">Frameworks / Libraries</p>
-                <div className="skill-subsection_items">
-                  <p>
-                    Express | Express Validator | Axios | JWT | Bcrypt | Gin | Sequelize
-                  </p>
-                </div>
-              </div>
-              <div className="skill-subsection">
-                <p className="skill-subsection_title">Databases</p>
-                <div className="skill-subsection_items">
-                  <p>MySQL | Postgres | Firebase | MongoDB</p>
-                </div>
-              </div>
-              <div className="skill-subsection">
-                <p className="skill-subsection_title">Hosting & Deployment</p>
-                <div className="skill-subsection_items">
-                  <p>
-                    Bluehost | Digital Ocean | Heroku | Netlify | Nginx
-                  </p>
-                </div>
-              </div>
-              <div className="skill-subsection">
-                <p className="skill-subsection_title">API Architectures</p>
-                <div className="skill-subsection_items">
-                  <p>REST | GraphQL | WebSockets | SSE</p>
-                </div>
-              </div>
-            </div>
-          </article>
+    <section id="skills" ref={ref} className={`${styles.skills} reveal ${visible ? 'in' : ''}`}>
+      <div className="wrap">
+        <div className={styles.head}>
+          <h2>The stack</h2>
+          <p className={styles.count}>02 — Skills</p>
         </div>
-      </section>
-    </div>
+
+        <div className={styles.cols}>
+          <div className={styles.col}>
+            <h3>Backend &amp; APIs</h3>
+            <p className={styles.overview}>Go first — services, data, and everything that keeps them running.</p>
+            <div className={styles.sub}>
+              <p className={styles.st}>Languages &amp; frameworks</p>
+              <Chips items={['Go', 'Gin', 'Fiber', 'Node / Express', 'Sequelize', 'JWT']} />
+            </div>
+            <div className={styles.sub}>
+              <p className={styles.st}>Databases</p>
+              <Chips items={['Postgres', 'MySQL', 'MongoDB', 'Firebase']} />
+            </div>
+            <div className={styles.sub}>
+              <p className={styles.st}>API styles</p>
+              <Chips items={['REST', 'GraphQL', 'WebSockets', 'SSE']} />
+            </div>
+            <div className={styles.sub}>
+              <p className={styles.st}>Hosting &amp; deploy</p>
+              <Chips items={['Docker', 'Digital Ocean', 'Heroku', 'Nginx']} />
+            </div>
+          </div>
+
+          <div className={styles.col}>
+            <h3>Application &amp; Front-End</h3>
+            <p className={styles.overview}>The client half of the same SaaS products — state, data fetching, UI.</p>
+            <div className={styles.sub}>
+              <p className={styles.st}>Languages</p>
+              <Chips items={['TypeScript', 'JavaScript', 'C#', 'SQL']} />
+            </div>
+            <div className={styles.sub}>
+              <p className={styles.st}>Frameworks</p>
+              <Chips items={['React', 'Vue', 'Lit', 'Redux / Vuex', 'Three.js']} />
+            </div>
+            <div className={styles.sub}>
+              <p className={styles.st}>Styling</p>
+              <Chips items={['Tailwind', 'SASS', 'Material UI']} />
+            </div>
+          </div>
+
+          <div className={styles.col}>
+            <h3>Testing &amp; Delivery</h3>
+            <p className={styles.overview}>The practices that keep the first two columns shippable.</p>
+            <div className={styles.sub}>
+              <p className={styles.st}>Testing</p>
+              <Chips items={['Jest', 'Playwright', 'Selenium', 'Mocha']} />
+            </div>
+            <div className={styles.sub}>
+              <p className={styles.st}>Source &amp; process</p>
+              <Chips items={['Git', 'Jira', 'Asana']} />
+            </div>
+            <p className={styles.alsoLine}>
+              Also comfortable with: Figma, Adobe CC, and WordPress / Contentful / Strapi for
+              client-site work.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
   )
 }
 

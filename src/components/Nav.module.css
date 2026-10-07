@@ -1,0 +1,75 @@
+.rail {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: var(--rail-width);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px 0;
+    z-index: 40;
+    border-right: 1px solid var(--hairline);
+    background: rgba(27, 23, 32, 0.6);
+    backdrop-filter: blur(6px);
+}
+
+.mark {
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: 22px;
+    color: var(--text);
+    writing-mode: vertical-rl;
+}
+
+.dots {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    align-items: center;
+}
+
+.dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--text-faint);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.dot:hover,
+.dot.active {
+    background: var(--hot);
+    transform: scale(1.3);
+}
+
+.socials {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--text-faint);
+}
+
+.socials a {
+    writing-mode: vertical-rl;
+    padding: 2px;
+    transition: color 0.2s;
+}
+
+.socials a:hover {
+    color: var(--pale);
+}
+
+@media (max-width: 760px) {
+    .rail {
+        display: none;
+    }
+}

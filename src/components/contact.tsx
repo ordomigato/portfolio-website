@@ -1,45 +1,30 @@
-import React from "react"
+import { useReveal } from '../utils/useReveal'
+import styles from './Contact.module.css'
 
-import "../styles/contact.scss"
+function Contact() {
+  const { ref, visible } = useReveal<HTMLElement>()
 
-const Contact = () => {
   return (
-    <section id="contact-form" className="contact_section">
-      <div className="contact-container">
-        <header>
-          <h2>Have a project or opportunity in mind?</h2>
-          <p>or just want to say hi?</p>
-        </header>
-        <form
-          method="POST"
-          name="Contact Form"
-          data-netlify="true"
-          data-netlify-honeypot="bot-field"
-        >
-          <input type="hidden" name="form-name" value="Contact Form" />
-          <div className="name-email_field">
-            <label>
-              <span>Name</span>
-              <input type="text" name="name" id="name" placeholder="Name" />
-            </label>
-            <label>
-              <span>Email</span>
-              <input type="email" name="email" id="email" placeholder="Email" />
-            </label>
+    <section id="contact" ref={ref} className={`${styles.contact} reveal ${visible ? 'in' : ''}`}>
+      <div className="wrap">
+        <p className="eyebrow" style={{ color: 'var(--pale)' }}>04 — Contact</p>
+        <div className={styles.head}>
+          <h2 className={styles.heading}>
+            <a href="mailto:hello@jeremygervais.dev">Let's talk</a>
+          </h2>
+          <p className={styles.meta}>
+            Currently open to full-time and contract work. Fastest way to reach me is email — I
+            read everything.
+          </p>
+        </div>
+        <div className={styles.foot}>
+          <span>© {new Date().getFullYear()} Jeremy Gervais</span>
+          <div className={styles.socials}>
+            <a href="https://github.com/ordomigato" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="#" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="/files/Jeremy%20Gervais%20-%20Resume.pdf" target="_blank" rel="noopener noreferrer">Résumé ↓</a>
           </div>
-          <label>
-            <span>Message</span>
-            <textarea
-              name="message"
-              id="message"
-              placeholder="Message..."
-              rows={3}
-            />
-          </label>
-          <br />
-          <div data-netlify-recaptcha="true"></div>
-          <button type="submit">Send</button>
-        </form>
+        </div>
       </div>
     </section>
   )
