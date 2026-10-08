@@ -165,3 +165,20 @@
 .disabled {
     color: var(--text-faint);
 }
+
+.videoBtn {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--pale);
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid transparent;
+    padding: 0 0 1px;
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+}
+
+.videoBtn:hover {
+    color: var(--hot);
+    border-color: var(--hot);
+}

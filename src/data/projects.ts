@@ -9,6 +9,8 @@ export interface Project {
   website?: string
   code?: string
   external?: { label: string; href: string }
+  /** YouTube id, for projects that were never deployed and can only be shown as a recording. */
+  video?: string
   note?: string
 }
 
@@ -20,7 +22,7 @@ export const projects: Project[] = [
     tech: ['Nuxt', 'Firebase', 'Node.js', 'Heroku', 'Vuex', 'Tailwind', 'Axios', 'SASS'],
     image: '/projects/gameshelf-thumb.png',
     code: 'https://github.com/ordomigato/game-shelf',
-    note: 'No longer hosted — Heroku retired its free tier',
+    note: 'No longer hosted as Heroku retired its free tier 😔',
   },
   {
     title: 'SecurePark',
@@ -29,7 +31,8 @@ export const projects: Project[] = [
     tech: ['Go', 'Fiber', 'Vue', 'Postgres', 'JWT', 'bcrypt'],
     image: '/projects/parking-app-thumb.png',
     code: 'https://github.com/ordomigato/parking-app',
-    note: 'No live demo',
+    video: 'SCixTRwwc_g',
+    note: 'Not deployed, so here it is on video',
   },
   {
     title: 'Skyview Security Website',
@@ -38,6 +41,7 @@ export const projects: Project[] = [
     tech: ['WordPress', 'Elementor Pro', 'Digital Ocean'],
     image: '/projects/skyview-thumb.png',
     website: 'https://skyviewsecurity.ca/',
+    note: 'Since updated by others, so the live site no longer reflects my original build',
   },
   {
     title: 'Message App',

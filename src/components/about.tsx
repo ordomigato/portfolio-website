@@ -7,23 +7,32 @@ const timeline: { year: string; entries: Entry[] }[] = [
   {
     year: '2016',
     entries: [
-      { role: 'Freelance WordPress builds', detail: 'Client sites, plus basic apps on the side' },
+      { role: 'Freelance WordPress builds', detail: 'Began building client sites, and basic apps on the side.' },
     ],
   },
   {
     year: '2020',
     entries: [
-      { role: 'GameShelf', detail: 'Lockdown build for my game collection' },
-      { role: 'SecurePark', detail: 'First client app, parking permits in Go & Vue' },
+      { role: 'GameShelf', detail: 'Built to catalog my game collection' },
+      { role: 'SecurePark', detail: 'Client app initially built for Skyview Security to handle parking permits for residents.' },
     ],
   },
   {
     year: '2021',
     entries: [
       {
-        role: 'LoginID - Passkeys',
+        role: 'New Job: LoginID (current)',
         href: 'https://loginid.ai/',
-        detail: 'Biometric auth & payments',
+        detail: 'Began position as developer (mostly frontend) working on software designed around biometric auth (passkeys), payments, identity verification, and more. Followed the companies transition into creating products for agentic workflows as well.',
+      },
+    ],
+  },
+  {
+    year: '2024',
+    entries: [
+      {
+        role: 'Floor ORG',
+        detail: 'Built a web app based on the hit show "The Floor" for a community of online reality gamers.',
       },
     ],
   },
@@ -31,8 +40,8 @@ const timeline: { year: string; entries: Entry[] }[] = [
     year: 'Now',
     entries: [
       {
-        role: 'LoginID - Identity & AI',
-        detail: 'Scope widened past simple user auth into agentic authentication and payments',
+        role: 'Card Maker Studio',
+        detail: 'Developing a desktop app for creating board game assets (cards, tokens, boards, etc.).',
       },
     ],
   },
@@ -64,7 +73,7 @@ function About() {
                 engineering team can build.
               </p>
               <p className={styles.para}>
-                On my own time, I'm continually taking on projects to hone my skills, or at least
+                On my own time, I'm continually taking on client projects as they come in as well as personal ones to hone my skills. It's nice to at least
                 have something to show that isn't behind an NDA 😅. Most of the projects below
                 are exactly that.
               </p>

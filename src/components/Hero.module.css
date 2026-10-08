@@ -30,8 +30,18 @@
 }
 
 @media (max-width: 760px) {
+    /* Name block, badge and the "00 — Hello World" eyebrow can't share one row at phone
+       widths without the badge and eyebrow each wrapping mid-phrase. Stack them instead. */
     .top {
         padding: 0 24px 10px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+    }
+
+    /* Decorative only, and there's no room for it beside the name on a phone. Desktop keeps it. */
+    .heroEyebrow {
+        display: none;
     }
 }
 
@@ -39,6 +49,12 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    flex-wrap: wrap;
+}
+
+.badge,
+.nameRow .name {
+    white-space: nowrap;
 }
 
 .name {

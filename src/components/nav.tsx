@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import styles from './Nav.module.css'
+import JgMark from './JgMark'
 
 const sections = [
   { id: 'hero', label: 'Home' },
@@ -57,7 +58,7 @@ function Nav() {
 
   return (
     <nav className={styles.rail}>
-      <span className={styles.mark}>JG</span>
+      <JgMark className={styles.mark} />
       <div className={styles.dots}>
         {sections.map((s) => (
           <button

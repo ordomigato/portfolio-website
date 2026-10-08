@@ -2,8 +2,15 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="any" />
+    <!--
+      Order and sizes matter: browsers score candidates by declared size against the size they
+      need (~32px for a tab). Anything advertising an exact 32x32 outranks the unsized SVG, so
+      a second PNG link here would win and we'd lose the SVG's light/dark adaptation. Keep it
+      to these three: .ico pinned to 32x32 for legacy, scalable SVG for modern, PNG for iOS.
+    -->
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Jeremy Gervais — full-stack software developer based in Ontario, Canada. Go, TypeScript, React." />
     <title>Jeremy Gervais — Software Developer</title>

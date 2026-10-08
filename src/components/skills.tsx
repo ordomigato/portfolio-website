@@ -25,7 +25,7 @@ function Skills() {
         <div className={styles.cols}>
           <div className={styles.col}>
             <h3>Backend &amp; APIs</h3>
-            <p className={styles.overview}>Go first — services, data, and everything that keeps them running.</p>
+            <p className={styles.overview}>Services, data, and everything that keeps them running.</p>
             <div className={styles.sub}>
               <p className={styles.st}>Languages &amp; frameworks</p>
               <Chips items={['Go', 'Gin', 'Fiber', 'Node / Express', 'Sequelize', 'JWT']} />
@@ -46,7 +46,7 @@ function Skills() {
 
           <div className={styles.col}>
             <h3>Application &amp; Front-End</h3>
-            <p className={styles.overview}>The client half of the same SaaS products — state, data fetching, UI.</p>
+            <p className={styles.overview}>State, data fetching, UI, accessibility.</p>
             <div className={styles.sub}>
               <p className={styles.st}>Languages</p>
               <Chips items={['TypeScript', 'JavaScript', 'C#', 'SQL']} />
@@ -59,6 +59,10 @@ function Skills() {
               <p className={styles.st}>Styling</p>
               <Chips items={['Tailwind', 'SASS', 'Material UI']} />
             </div>
+            <div className={styles.sub}>
+              <p className={styles.st}>Accessibility</p>
+              <Chips items={['a11y', 'WAVE']} />
+            </div>
           </div>
 
           <div className={styles.col}>
@@ -70,7 +74,7 @@ function Skills() {
             </div>
             <div className={styles.sub}>
               <p className={styles.st}>Source &amp; process</p>
-              <Chips items={['Git', 'Jira', 'Asana']} />
+              <Chips items={['Git', 'Jira', 'Confluence', 'Asana']} />
             </div>
             <p className={styles.alsoLine}>
               Also comfortable with: Figma, Adobe CC, and WordPress / Contentful / Strapi for

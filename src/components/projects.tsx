@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
-import { projects, type ProjectType } from '../data/projects'
+import { projects, type Project, type ProjectType } from '../data/projects'
 import { useReveal } from '../utils/useReveal'
+import VideoDialog from './VideoDialog'
 import styles from './Projects.module.css'
 
 type Filter = 'all' | ProjectType
@@ -15,6 +16,7 @@ const filters: { label: string; value: Filter }[] = [
 function Projects() {
   const { ref, visible } = useReveal<HTMLElement>()
   const [filter, setFilter] = useState<Filter>('all')
+  const [video, setVideo] = useState<Project | null>(null)
 
   const shown = useMemo(
     () => projects.filter((p) => filter === 'all' || p.type === filter),
@@ -29,7 +31,7 @@ function Projects() {
             <p className="eyebrow" style={{ color: 'var(--lilac)' }}>03 — Projects</p>
             <h2 className={styles.heading}>Selected work</h2>
           </div>
-          <p className={styles.count}>{shown.length} shown · 2020 – 2024</p>
+          <p className={styles.count}>{shown.length} shown · 2020 – {new Date().getFullYear()}</p>
         </div>
 
         <div className={styles.filters}>
@@ -70,12 +72,29 @@ function Projects() {
                 {project.external && (
                   <a href={project.external.href} target="_blank" rel="noopener noreferrer">{project.external.label} ↗</a>
                 )}
+                {project.video && (
+                  <button
+                    type="button"
+                    className={styles.videoBtn}
+                    onClick={() => setVideo(project)}
+                  >
+                    Watch demo ▶
+                  </button>
+                )}
                 {project.note && <span className={styles.disabled}>{project.note}</span>}
               </div>
             </article>
           ))}
         </div>
       </div>
+
+      {video?.video && (
+        <VideoDialog
+          videoId={video.video}
+          title={video.title}
+          onClose={() => setVideo(null)}
+        />
+      )}
     </section>
   )
 }

@@ -18,7 +18,9 @@ function Hero() {
           </div>
           <p className={styles.loc}>// Ontario, Canada</p>
         </div>
-        <p className="eyebrow" style={{ color: 'var(--hot)' }}>00 — Hello World</p>
+        <p className={`eyebrow ${styles.heroEyebrow}`} style={{ color: 'var(--hot)' }}>
+          00 — Hello World
+        </p>
       </div>
 
       <div className={`${styles.marqueeWrap}`}>
@@ -41,7 +43,7 @@ function Hero() {
 
       <div className={styles.bottom}>
         <p className={styles.sub}>
-          Software developer with <strong>6+ years</strong> of professional and over a decade of freelance experience building full-stack <strong>websites, web-based applications, and SaaS products</strong>.
+          Software developer with <strong>{new Date().getFullYear() - 2020}+</strong> years of professional and over a decade of freelance experience building full-stack <strong>websites, web-based applications, and SaaS products</strong>.
         </p>
         <div className={styles.cta}>
           <Button href="#contact">Get in touch</Button>
