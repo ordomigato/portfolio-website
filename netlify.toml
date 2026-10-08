@@ -1,3 +1,48 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
 [build.environment]
-  NODE_VERSION = "18.11.0"
-  NPM_VERSION = "8.19.2"
+  NODE_VERSION = "20.11.0"
+
+# The Gatsby site had a page per project; the rewrite is a single page, so send old
+# links (search results, shared URLs, the resume) to the projects section instead of a 404.
+[[redirects]]
+  from = "/gameshelf"
+  to = "/#projects"
+  status = 301
+
+[[redirects]]
+  from = "/parking-permit-app"
+  to = "/#projects"
+  status = 301
+
+[[redirects]]
+  from = "/secure-park"
+  to = "/#projects"
+  status = 301
+
+[[redirects]]
+  from = "/skyview-website"
+  to = "/#projects"
+  status = 301
+
+[[redirects]]
+  from = "/message-app"
+  to = "/#projects"
+  status = 301
+
+[[redirects]]
+  from = "/travel-odyssey"
+  to = "/#projects"
+  status = 301
+
+[[redirects]]
+  from = "/floor-org"
+  to = "/#projects"
+  status = 301
+
+[[redirects]]
+  from = "/icon-set-1"
+  to = "/#projects"
+  status = 301

@@ -1,0 +1,9 @@
+.main {
+    margin-left: var(--rail-width);
+}
+
+@media (max-width: 760px) {
+    .main {
+        margin-left: 0;
+    }
+}
