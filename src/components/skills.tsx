@@ -5,7 +5,7 @@ function Chips({ items }: { items: string[] }) {
   return (
     <div className={styles.chips}>
       {items.map((item) => (
-        <span key={item} className="chip">{item}</span>
+        <span key={item} className={`chip ${styles.skillChip}`}>{item}</span>
       ))}
     </div>
   )
@@ -19,7 +19,7 @@ function Skills() {
       <div className="wrap">
         <div className={styles.head}>
           <h2>The stack</h2>
-          <p className={styles.count}>02 — Skills</p>
+          <p className="eyebrow" style={{ color: 'var(--hot-dim)' }}>02 — Skills</p>
         </div>
 
         <div className={styles.cols}>
@@ -53,7 +53,7 @@ function Skills() {
             </div>
             <div className={styles.sub}>
               <p className={styles.st}>Frameworks</p>
-              <Chips items={['React', 'Vue', 'Lit', 'Redux / Vuex', 'Three.js']} />
+              <Chips items={['React', 'Vue', 'Lit', 'Redux / Vuex', 'Pinia', 'Three.js']} />
             </div>
             <div className={styles.sub}>
               <p className={styles.st}>Styling</p>
@@ -76,6 +76,20 @@ function Skills() {
               Also comfortable with: Figma, Adobe CC, and WordPress / Contentful / Strapi for
               client-site work.
             </p>
+          </div>
+
+          <div className={`${styles.col} ${styles.aiCol}`}>
+            <div className={styles.aiHead}>
+              <h3>AI &amp; Agentic Workflows</h3>
+              <span className={styles.aiTag}>// new terrain</span>
+            </div>
+            <p className={styles.overview}>
+              The newest part of the stack, and the one I'm still actively figuring out, but
+              already shipping with it.
+            </p>
+            <div className={styles.sub}>
+              <Chips items={['Agentic Engineering', 'Context Engineering', 'Agent Orchestration']} />
+            </div>
           </div>
         </div>
       </div>

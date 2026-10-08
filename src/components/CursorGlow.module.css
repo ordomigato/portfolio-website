@@ -6,12 +6,11 @@
     height: 38vmax;
     border-radius: 50%;
     background: radial-gradient(circle at center, rgba(255, 59, 92, 0.3), rgba(255, 59, 92, 0) 60%);
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scale(var(--glow-scale, 0));
     pointer-events: none;
     mix-blend-mode: screen;
     z-index: 5;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: transform 0.2s ease;
 }
 
 @media (max-width: 760px), (hover: none) {

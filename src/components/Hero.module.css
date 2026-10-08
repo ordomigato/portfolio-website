@@ -35,6 +35,12 @@
     }
 }
 
+.nameRow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 .name {
     font-family: var(--font-mono);
     font-weight: 600;
@@ -50,17 +56,19 @@
     margin-top: 4px;
 }
 
-.status {
+.badge {
     font-family: var(--font-mono);
-    font-size: 12px;
+    font-size: 11px;
     color: var(--text-soft);
-    text-align: right;
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
+    padding: 3px 9px;
+    border: 1px solid var(--hairline);
+    border-radius: 20px;
 }
 
-.status .dot {
+.badge .dot {
     width: 6px;
     height: 6px;
     border-radius: 50%;

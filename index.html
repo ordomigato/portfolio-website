@@ -14,5 +14,18 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+
+    <!--
+      Netlify's form detector only scans the static HTML it deploys — it never runs this
+      page's JavaScript, so it can't see the React-rendered form in Contact.tsx. This hidden
+      twin exists purely so the build picks up the form; it's never shown or submitted itself.
+      Field names here must stay in sync with the real form.
+    -->
+    <form name="Contact Form" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <textarea name="message"></textarea>
+      <input type="text" name="bot-field" />
+    </form>
   </body>
 </html>

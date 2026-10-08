@@ -1,7 +1,7 @@
 import Button from './Button'
 import styles from './Hero.module.css'
 
-const stack = ['Go', 'TypeScript', 'React', 'Vue', 'Lit', 'Node.js', 'PostgreSQL', 'GraphQL']
+const stack = ['JavaScript', 'TypeScript', 'React', 'Vue', 'Svelte', 'Lit', 'Node.js', 'Tauri', 'PostgreSQL', 'MongoDB', 'Firebase', 'MySQL', 'REST', 'Express', 'GraphQL', 'Go', 'C#', 'Docker', 'Netlify', 'Git', 'CI/CD']
 const headline = ['Software Developer', 'Dashboards', 'WebApps', 'Websites']
 
 function Hero() {
@@ -9,13 +9,16 @@ function Hero() {
     <section id="hero" className={styles.hero}>
       <div className={styles.top}>
         <div>
-          <p className={styles.name}>JEREMY&nbsp;GERVAIS</p>
+          <div className={styles.nameRow}>
+            <p className={styles.name}>JEREMY&nbsp;GERVAIS</p>
+            <span className={styles.badge}>
+              <span className={styles.dot} />
+              Open to opportunities
+            </span>
+          </div>
           <p className={styles.loc}>// Ontario, Canada</p>
         </div>
-        <div className={styles.status}>
-          <span className={styles.dot} />
-          Open to new work
-        </div>
+        <p className="eyebrow" style={{ color: 'var(--hot)' }}>00 — Hello World</p>
       </div>
 
       <div className={`${styles.marqueeWrap}`}>
@@ -38,9 +41,7 @@ function Hero() {
 
       <div className={styles.bottom}>
         <p className={styles.sub}>
-          Software developer building full-stack <strong>SaaS products</strong> — from backend
-          to interface, shipped and maintained end to end. <strong>6+ years</strong> professional,
-          plus over a decade freelancing.
+          Software developer with <strong>6+ years</strong> of professional and over a decade of freelance experience building full-stack <strong>websites, web-based applications, and SaaS products</strong>.
         </p>
         <div className={styles.cta}>
           <Button href="#contact">Get in touch</Button>

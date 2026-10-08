@@ -30,39 +30,124 @@
     color: var(--hot-dim);
 }
 
-.para {
+.paras {
     margin-top: 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.para {
     font-size: 16px;
     line-height: 1.7;
     color: var(--paper-ink-soft);
     max-width: 56ch;
 }
 
-.stats {
+.timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
-    border-top: 1px solid rgba(36, 31, 43, 0.15);
 }
 
-.statRow {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding: 18px 0;
-    border-bottom: 1px solid rgba(36, 31, 43, 0.15);
+/* one year label, with one or more entries hanging off it */
+.group {
+    display: grid;
+    grid-template-columns: 54px 1fr;
+    gap: 18px;
 }
 
-.num {
+.year {
     font-family: var(--font-display);
     font-weight: 800;
-    font-size: 40px;
+    font-size: 24px;
+    /* Matches .role's line box (15px text, ~17px line) so the year's glyphs, the role text
+       and the dot all centre on the same band despite the 24px/15px size difference. */
+    line-height: 17px;
+    text-align: right;
 }
 
-.label {
+.entries {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.entry {
+    position: relative;
+    padding-left: 22px;
+    padding-bottom: 26px;
+}
+
+/* dot — centred on the title's 17px line box: (17 - 9) / 2 = 4 */
+.entry::before {
+    content: '';
+    position: absolute;
+    left: -4px;
+    top: 4px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--paper-ink);
+    z-index: 1;
+}
+
+/* Connector runs the full height of every entry and passes behind the dot, so the line
+   stays unbroken across entries *and* across year-group boundaries. The first and last
+   entries trim it back to their own dot below. */
+.entry::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: rgba(36, 31, 43, 0.2);
+}
+
+.group:first-child .entry:first-child::after {
+    top: 8px;
+}
+
+.group:last-child .entry:last-child {
+    padding-bottom: 0;
+}
+
+.group:last-child .entry:last-child::after {
+    bottom: auto;
+    height: 8px;
+}
+
+.group:last-child .entry:last-child::before {
+    background: var(--hot);
+    box-shadow: 0 0 0 4px rgba(255, 59, 92, 0.15);
+}
+
+.role {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--paper-ink);
+}
+
+/* global `a` has text-decoration:none, so give the link its own affordance */
+.role a {
+    border-bottom: 1px solid rgba(36, 31, 43, 0.25);
+    padding-bottom: 1px;
+    transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.role a:hover {
+    color: var(--hot-dim);
+    border-color: var(--hot-dim);
+}
+
+.detail {
     font-family: var(--font-mono);
-    font-size: 12px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+    font-size: 11.5px;
+    line-height: 1.5;
     color: var(--paper-ink-soft);
-    text-align: right;
+    margin-top: 4px;
 }
