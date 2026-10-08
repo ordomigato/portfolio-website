@@ -1,9 +1,13 @@
-export type ProjectType = 'Web App' | 'Website' | 'Design'
+export type ProjectType = 'Development' | 'Design'
+export type Platform = 'Web App' | 'Website' | 'Desktop App'
 
 export interface Project {
   title: string
   year: number
-  type: ProjectType
+  /** Which filters the project shows under. */
+  types: ProjectType[]
+  /** What was built, shown on the card. Design-only projects leave it out. */
+  platform?: Platform
   tech: string[]
   image: string
   website?: string
@@ -11,15 +15,28 @@ export interface Project {
   external?: { label: string; href: string }
   /** YouTube id, for projects that were never deployed and can only be shown as a recording. */
   video?: string
+  /** Full-size image opened in a popup, for work that only exists as artwork. */
+  gallery?: { src: string; caption?: string }
   note?: string
 }
 
 export const projects: Project[] = [
   {
+    title: 'Card Maker Studio',
+    year: 2026,
+    types: ['Development', 'Design'],
+    platform: 'Desktop App',
+    tech: ['Tauri', 'React', 'TypeScript', 'Tailwind', 'shadcn/ui', 'Zod', 'Vitest', 'Playwright'],
+    image: '/projects/card-maker-studio.png',
+    gallery: { src: '/projects/card-maker-studio.png' },
+    note: 'In development',
+  },
+  {
     title: 'GameShelf',
     year: 2020,
-    type: 'Web App',
-    tech: ['Nuxt', 'Firebase', 'Node.js', 'Heroku', 'Vuex', 'Tailwind', 'Axios', 'SASS'],
+    types: ['Development', 'Design'],
+    platform: 'Web App',
+    tech: ['Nuxt', 'Firebase', 'Node.js', 'Heroku', 'Vuex', 'Tailwind', 'Axios', 'SCSS'],
     image: '/projects/gameshelf-thumb.png',
     code: 'https://github.com/ordomigato/game-shelf',
     note: 'No longer hosted as Heroku retired its free tier 😔',
@@ -27,8 +44,9 @@ export const projects: Project[] = [
   {
     title: 'SecurePark',
     year: 2020,
-    type: 'Web App',
-    tech: ['Go', 'Fiber', 'Vue', 'Postgres', 'JWT', 'bcrypt'],
+    types: ['Development', 'Design'],
+    platform: 'Web App',
+    tech: ['Go', 'Fiber', 'Vue', 'Postgres', 'REST', 'JWT', 'bcrypt', 'Nginx'],
     image: '/projects/parking-app-thumb.png',
     code: 'https://github.com/ordomigato/parking-app',
     video: 'SCixTRwwc_g',
@@ -37,7 +55,8 @@ export const projects: Project[] = [
   {
     title: 'Skyview Security Website',
     year: 2020,
-    type: 'Website',
+    types: ['Development', 'Design'],
+    platform: 'Website',
     tech: ['WordPress', 'Elementor Pro', 'Digital Ocean'],
     image: '/projects/skyview-thumb.png',
     website: 'https://skyviewsecurity.ca/',
@@ -46,8 +65,9 @@ export const projects: Project[] = [
   {
     title: 'Message App',
     year: 2021,
-    type: 'Web App',
-    tech: ['React', 'Material UI', 'Node.js', 'Express', 'Sequelize', 'Socket.io'],
+    types: ['Development'],
+    platform: 'Web App',
+    tech: ['React', 'Material UI', 'Node.js', 'Express', 'REST', 'Sequelize', 'Socket.io'],
     image: '/projects/messenger-thumb.png',
     code: 'https://github.com/ordomigato/message-app',
     note: 'No live demo',
@@ -55,7 +75,7 @@ export const projects: Project[] = [
   {
     title: 'Travel Odyssey',
     year: 2023,
-    type: 'Design',
+    types: ['Design'],
     tech: ['Adobe XD', 'Material UI'],
     image: '/projects/travel-app/landing-page.png',
     external: { label: 'View on Behance', href: 'https://www.behance.net/gallery/169097717/Travel-Odyssey' },
@@ -63,18 +83,40 @@ export const projects: Project[] = [
   {
     title: 'Floor ORG',
     year: 2024,
-    type: 'Web App',
+    types: ['Development'],
+    platform: 'Web App',
     tech: ['TypeScript', 'Vue', 'Pinia', 'Firebase', 'Netlify'],
     image: '/projects/floor-thumb.jpg',
     website: 'https://floor-game.netlify.app',
     code: 'https://github.com/ordomigato/floor',
+    video: 'LoDZnveNiDU',
   },
   {
     title: 'Icon Set (1)',
     year: 2024,
-    type: 'Design',
+    types: ['Design'],
     tech: ['Adobe Illustrator'],
     image: '/projects/icon-set.png',
-    note: 'Personal project, no link',
+    gallery: { src: '/projects/icon-set.png', caption: 'Just some SVG icons I made =)' },
   },
 ]
+
+/** Skill names that are spelled differently, or bundled, in project tech lists. */
+const techAliases: Record<string, string[]> = {
+  'Node / Express': ['Node.js', 'Express'],
+  'Adobe CC': ['Adobe XD', 'Adobe Illustrator'],
+  WebSockets: ['Socket.io'],
+}
+
+/** Baseline of every development project, so linked from the Stack but left off the cards. */
+const everyBuild = ['HTML', 'CSS', 'Git']
+
+export function projectsUsing(skill: string) {
+  if (everyBuild.includes(skill)) return projects.filter((p) => p.types.includes('Development'))
+  // TypeScript is listed where it was used, so plain JavaScript is every other build.
+  if (skill === 'JavaScript') {
+    return projects.filter((p) => p.types.includes('Development') && !p.tech.includes('TypeScript'))
+  }
+  const names = techAliases[skill] ?? [skill]
+  return projects.filter((p) => p.tech.some((t) => names.includes(t)))
+}

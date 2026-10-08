@@ -138,7 +138,8 @@
 
 .tickerTrack {
     display: inline-flex;
-    animation: tickerScroll 20s linear infinite;
+    /* ~0.95s per item matches the original pace (21 items over 20s) */
+    animation: tickerScroll calc(var(--count, 21) * 0.95s) linear infinite;
 }
 
 @keyframes tickerScroll {

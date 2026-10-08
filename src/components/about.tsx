@@ -1,7 +1,7 @@
 import { useReveal } from '../utils/useReveal'
 import styles from './About.module.css'
 
-type Entry = { role: string; detail: string; href?: string }
+type Entry = { role: string; detail: string; href?: string; current?: boolean }
 
 const timeline: { year: string; entries: Entry[] }[] = [
   {
@@ -21,9 +21,10 @@ const timeline: { year: string; entries: Entry[] }[] = [
     year: '2021',
     entries: [
       {
-        role: 'New Job: LoginID (current)',
+        role: 'Joined LoginID',
         href: 'https://loginid.ai/',
-        detail: 'Began position as developer (mostly frontend) working on software designed around biometric auth (passkeys), payments, identity verification, and more. Followed the companies transition into creating products for agentic workflows as well.',
+        current: true,
+        detail: 'Began position as developer (mostly frontend) working on software designed around biometric auth (passkeys), payments, identity verification, and more. Followed the companies transition into creating solutions based on our products for agentic flows as well.',
       },
     ],
   },
@@ -37,11 +38,11 @@ const timeline: { year: string; entries: Entry[] }[] = [
     ],
   },
   {
-    year: 'Now',
+    year: '2026',
     entries: [
       {
         role: 'Card Maker Studio',
-        detail: 'Developing a desktop app for creating board game assets (cards, tokens, boards, etc.).',
+        detail: 'Currently developing a specialized desktop app for designing and printing board game assets (cards, tokens, boards, etc.).',
       },
     ],
   },
@@ -94,6 +95,7 @@ function About() {
                         ) : (
                           entry.role
                         )}
+                        {entry.current && <span className={styles.current}>Present Employer</span>}
                       </p>
                       <p className={styles.detail}>{entry.detail}</p>
                     </li>

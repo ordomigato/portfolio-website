@@ -1,7 +1,8 @@
+import type { CSSProperties } from 'react'
 import Button from './Button'
 import styles from './Hero.module.css'
 
-const stack = ['JavaScript', 'TypeScript', 'React', 'Vue', 'Svelte', 'Lit', 'Node.js', 'Tauri', 'PostgreSQL', 'MongoDB', 'Firebase', 'MySQL', 'REST', 'Express', 'GraphQL', 'Go', 'C#', 'Docker', 'Netlify', 'Git', 'CI/CD']
+const stack = ['JavaScript', 'TypeScript', 'React', 'Next.js', 'Vue', 'Nuxt', 'Svelte', 'Lit', 'Tailwind', 'Node.js', 'Tauri', 'PostgreSQL', 'MongoDB', 'Firebase', 'MySQL', 'REST', 'Express', 'GraphQL', 'Go', 'Docker', 'Netlify', 'Playwright', 'Git', 'CI/CD']
 const headline = ['Software Developer', 'Dashboards', 'WebApps', 'Websites']
 
 function Hero() {
@@ -33,7 +34,8 @@ function Hero() {
         </div>
 
         <div className={styles.ticker}>
-          <div className={styles.tickerTrack}>
+          {/* Duration scales with the list so the scroll speed stays the same as items change. */}
+          <div className={styles.tickerTrack} style={{ '--count': stack.length } as CSSProperties}>
             {Array.from({ length: 8 }, () => stack).flat().map((word, i) => (
               <span key={i}>{word}</span>
             ))}

@@ -144,6 +144,23 @@
     border-color: var(--hot-dim);
 }
 
+/* ongoing role marker, sits inline after the title */
+.current {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 2px 7px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    vertical-align: 1px;
+    color: var(--hot-dim);
+    background: rgba(255, 59, 92, 0.1);
+    border-radius: 999px;
+}
+
 .detail {
     font-family: var(--font-mono);
     font-size: 11.5px;

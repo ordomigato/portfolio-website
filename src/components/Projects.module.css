@@ -57,6 +57,22 @@
     border-color: var(--pale);
 }
 
+.techFilter {
+    color: var(--hot);
+    border-color: var(--hot);
+}
+
+.techFilter:hover {
+    color: var(--ink);
+    background: var(--hot);
+    border-color: var(--hot);
+}
+
+.filterBtn.design.active {
+    background: var(--sky);
+    border-color: var(--sky);
+}
+
 .grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -104,6 +120,15 @@
     border: 1px solid rgba(255, 233, 168, 0.3);
     padding: 3px 8px;
     border-radius: 2px;
+}
+
+.typeDesign {
+    color: var(--sky);
+    border-color: rgba(169, 205, 240, 0.35);
+}
+
+.designPart {
+    color: var(--sky);
 }
 
 .cover {
@@ -166,7 +191,7 @@
     color: var(--text-faint);
 }
 
-.videoBtn {
+.mediaBtn {
     font-family: var(--font-mono);
     font-size: 12px;
     color: var(--pale);
@@ -178,7 +203,7 @@
     transition: color 0.15s, border-color 0.15s;
 }
 
-.videoBtn:hover {
+.mediaBtn:hover {
     color: var(--hot);
     border-color: var(--hot);
 }
